@@ -12,9 +12,6 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
-    db.connect()
-    db.create_tables([User, Item])
-    db.close()
     logging.basicConfig(level = logging.INFO)
     try:
         asyncio.run(main())
