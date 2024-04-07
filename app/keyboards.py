@@ -16,5 +16,5 @@ btn_swag4 =  InlineKeyboardButton(text='Хуй', callback_data='btn_swag4')
 
 #-----------------------------------КЛАВИАТУРЫ-----------------------------------
 #Клавиатура вступления
-kb_back = InlineKeyboardMarkup([[btn_back]])
-kb_main = InlineKeyboardMarkup([[btn_profile]])
+kb_back = InlineKeyboardMarkup(inline_keyboard=[[btn_back]])
+kb_main = InlineKeyboardMarkup(inline_keyboard=[[btn_profile]])
