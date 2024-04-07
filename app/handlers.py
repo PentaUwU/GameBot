@@ -30,7 +30,8 @@ async def profile(callback: CallbackQuery):
     user = User.select().where(User.user_id == callback.from_user.id).first()
     await callback.answer('')
     await callback.message.edit_text(f"""Твой id: {user.id}.
-У тебя на счету: {user.balance}$""",
+У тебя на счету: {user.balance}$
+Твой уровень: {user.user_lvl}""",
                                     reply_markup= kb.kb_back)
 
 @router.callback_query(F.data == 'btn_daily_bonus')
@@ -43,7 +44,7 @@ async def dailybonus(callback: CallbackQuery):
         await callback.answer('Бонус успешно получен')
     else:
         # Вычисляем разницу времени
-        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now()
+        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now
         # Форматируем временной интервал
         remaining_time_formatted = str(remaining_time).split('.')[0]
         await callback.message.edit_text(f"Сегодня ты уже получал бонус, приходи через: {remaining_time_formatted}",
