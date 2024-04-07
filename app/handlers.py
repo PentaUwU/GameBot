@@ -3,9 +3,8 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
 from app import router
 from app.database.models import User
-import random
 # from typing import Union
-#
+# Привет
 # Команда старт
 @router.message(CommandStart())
 async def cmd_start(message: Message):
