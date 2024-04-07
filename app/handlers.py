@@ -22,3 +22,10 @@ async def cmd_start(message: Union[Message, CallbackQuery]):
     else: # Сообщение при вводе команды /start
         await message.reply(f'Привет, {message.from_user.first_name}, приятной игры!',
                                     reply_markup=kb.kb_main)
+
+
+@router.callback_query(F.data == "btn_profile")
+async def profile(callback: CallbackQuery):
+    user = User.select().where(User.user_id == callback.from_user.id).first()
+    await callback.answer('')
+    await callback.message.edit_text(f'Твой id - {user.user_id}.\nУ тебя на счету - {user.balance}')

@@ -11,6 +11,7 @@ class BaseModel(Model):
 class User(BaseModel):
     user_id = BigIntegerField()
     username = CharField(null = True)
+    balance = BigIntegerField(default=10000)
     class Meta:
         db_table = 'Users'
 #
