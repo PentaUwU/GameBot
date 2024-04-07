@@ -32,7 +32,7 @@ async def profile(callback: CallbackQuery):
     await callback.answer('')
     await callback.message.edit_text(f"""Твой id: {user.id}.
 У тебя на счету: {user.balance}$
-Твой уровень: {user.user_lvl}
+Твой уровень: {lvl_plus(user.user_xp, user.user_lvl)}
 Опыта до нового уровня: {ff(user.user_lvl) - user.user_xp}""",
                                     reply_markup= kb.kb_back)
     
