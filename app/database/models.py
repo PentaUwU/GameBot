@@ -9,7 +9,8 @@ class BaseModel(Model):
         database = db
 
 class User(BaseModel):
-    user_id = BigIntegerField(primary_key=True)
+    personal_id = AutoField(primary_key = True)
+    user_id = BigIntegerField()
     username = CharField(null = True)
     class Meta:
         db_table = 'Users'
