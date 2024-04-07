@@ -6,6 +6,7 @@ import app.keyboards as kb
 from app.database.models import User
 from typing import Union
 from datetime import timedelta, datetime
+from app.level import *
 
 # Команда старт
 @router.callback_query(F.data == 'btn_back')
@@ -31,7 +32,7 @@ async def profile(callback: CallbackQuery):
     await callback.answer('')
     await callback.message.edit_text(f"""Твой id: {user.id}.
 У тебя на счету: {user.balance}$
-Твой уровень: {user.user_lvl}""",
+Твой уровень: {ff(user.user_lvl)}""",
                                     reply_markup= kb.kb_back)
 
 @router.callback_query(F.data == 'btn_daily_bonus')
