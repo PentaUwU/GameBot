@@ -3,7 +3,7 @@ __pycache__/
 *.pyс[cod]
 *$py.class
 *.рус
-
+*.db
 # C extensions
 *.so
 
