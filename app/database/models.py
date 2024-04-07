@@ -10,6 +10,6 @@ class BaseModel(Model):
 
 class User(BaseModel):
     user_id = BigIntegerField(primary_key=True)
-    username = CharField(null = False)
+    username = CharField(null = True)
     class Meta:
         db_table = 'Users'
