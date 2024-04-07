@@ -4,7 +4,7 @@ from aiogram.types import Message, CallbackQuery
 from app import router
 from app.database.models import User
 # from typing import Union
-
+#
 # Команда старт
 @router.message(CommandStart())
 async def cmd_start(message: Message):

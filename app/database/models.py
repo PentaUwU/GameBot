@@ -13,3 +13,4 @@ class User(BaseModel):
     username = CharField(null = True)
     class Meta:
         db_table = 'Users'
+#
