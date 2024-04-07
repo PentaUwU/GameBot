@@ -25,16 +25,18 @@ async def cmd_start(message: Union[Message, CallbackQuery]):
         await message.reply(f'Привет, {message.from_user.first_name}, приятной игры!',
                                     reply_markup=kb.kb_main)
 
-
+# Вывод информации о пользователе
 @router.callback_query(F.data == "btn_profile")
 async def profile(callback: CallbackQuery):
     user = User.select().where(User.user_id == callback.from_user.id).first()
     await callback.answer('')
     await callback.message.edit_text(f"""Твой id: {user.id}.
 У тебя на счету: {user.balance}$
-Твой уровень: {ff(user.user_lvl)}""",
+Твой уровень: {user.user_lvl}
+Опыта до нового уровня: {ff(user.user_lvl) - user.user_xp}""",
                                     reply_markup= kb.kb_back)
-
+    
+# Ежедневный бонус
 @router.callback_query(F.data == 'btn_daily_bonus')
 async def dailybonus(callback: CallbackQuery):
     user = User.select().where(User.user_id == callback.from_user.id).first()
