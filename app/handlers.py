@@ -28,4 +28,7 @@ async def cmd_start(message: Union[Message, CallbackQuery]):
 async def profile(callback: CallbackQuery):
     user = User.select().where(User.user_id == callback.from_user.id).first()
     await callback.answer('')
-    await callback.message.edit_text(f'Твой id - {user.user_id}.\nУ тебя на счету - {user.balance}')
+    await callback.message.edit_text(f'Твой id - {user.id}.\nУ тебя на счету - {user.balance}')
+
+@router.callback_query(F.data == 'btn_daily_bonus')
+async def dailybonus(callback: CallbackQuery):
