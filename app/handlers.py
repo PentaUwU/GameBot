@@ -43,7 +43,7 @@ async def dailybonus(callback: CallbackQuery):
         await callback.answer('Бонус успешно получен')
     else:
         # Вычисляем разницу времени
-        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now
+        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now()
         # Форматируем временной интервал
         remaining_time_formatted = str(remaining_time).split('.')[0]
         await callback.message.edit_text(f"Сегодня ты уже получал бонус, приходи через: {remaining_time_formatted}",
