@@ -6,6 +6,9 @@ def next_xp(lvl_user):
     return int(exp)
 
 def lvl_plus(xp_user, lvl_user):
+    # base = 100
+    # # Расчет опыта для следующего уровня
+    # exp = base * (1.5 ** (lvl_user - 1))
     if next_xp(lvl_user) - xp_user <= 0:
         lvl_user += 1
-    return lvl_user
+    return lvl_user#, int(exp)
