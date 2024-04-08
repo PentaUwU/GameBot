@@ -23,7 +23,6 @@ async def top_play(callback: CallbackQuery):
 
     message = "Топ игроков по балансу:\n"
     for i, user in enumerate(top_balance_users, start=1):
-        setattr(user, 'money_rank', i)
         message += f'{i}) {user.username} - Баланс: {user.balance}\n'
 
     # Получаем 10 пользователей с наибольшим опытом
@@ -31,7 +30,6 @@ async def top_play(callback: CallbackQuery):
 
     message += "\nТоп игроков по опыту:\n"
     for i, user in enumerate(top_lvl_users, start=1):
-        setattr(user, 'lvl_rank', i)
         message += f'{i}) {user.username} - Уровень: {user.user_lvl}\n'
 
     await callback.message.edit_text(message, reply_markup=kb.kb_back)
