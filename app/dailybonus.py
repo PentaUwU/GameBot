@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from aiogram import F
 from aiogram.types import CallbackQuery
 from app.database.models import User
-import keyboards as kb
+import app.keyboards as kb
 
 # Ежедневный бонус
 @router.callback_query(F.data == 'btn_daily_bonus')

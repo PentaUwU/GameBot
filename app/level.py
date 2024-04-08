@@ -1,8 +1,3 @@
-from app.database.models import User
-from aiogram.types import Message
-
-
-
 def ff(lvl_user):
     base = 100
 

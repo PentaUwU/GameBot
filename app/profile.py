@@ -3,7 +3,7 @@ from app.level import ff, lvl_plus
 from aiogram import F
 from aiogram.types import CallbackQuery
 from app.database.models import User
-import keyboards as kb
+import app.keyboards as kb
 
 
 # Вывод информации о пользователе и логика добавления уровня при заходе на профиль

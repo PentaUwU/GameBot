@@ -1,8 +1,9 @@
+from aiogram import F
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from typing import Union
 from app.database.models import User
-import keyboards as kb
+import app.keyboards as kb
 from app import router
 
 
