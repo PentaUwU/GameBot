@@ -17,4 +17,10 @@ class User(BaseModel):
     user_xp = IntegerField(default=560)
     class Meta:
         db_table = 'Users'
-#
+
+class TopPlayer(BaseModel):
+    user = ForeignKeyField(User, backref='top_player')
+    money_rank = IntegerField(default=0)
+    xp_rank = IntegerField(default=0)
+    class meta:
+        db_table = 'TopPlayers'
