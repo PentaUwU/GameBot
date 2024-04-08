@@ -18,10 +18,9 @@ async def top_play(callback: CallbackQuery):
     if new_level > user.user_lvl:
         user.user_lvl = new_level
         user.save()
-    users = User.select().order_by(User.user_lvl.desc).limit(2)
-    
-    
-    # user_list = [users]
+    await callback.answer('')
+    # users = User.select().order_by(User.user_lvl.desc).limit(2)
+    # # user_list = [users]
 
-    for user in users:
-        await callback.message.edit_text(f'1) {user.username}{user.user_lvl}', reply_markup=kb.kb_back)
+    # for user in users:
+    #     await callback.message.edit_text(f'1) {user.username}{user.user_lvl}', reply_markup=kb.kb_back)
