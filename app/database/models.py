@@ -9,7 +9,7 @@ class BaseModel(Model):
         database = db
 
 class User(BaseModel):
-    user_id = BigIntegerField()
+    user_id = BigIntegerField(primary_key=True)
     username = CharField(null=True)
     balance = BigIntegerField(default=10000)
     last_bonus_claim = DateTimeField(default=datetime.min)
@@ -18,9 +18,3 @@ class User(BaseModel):
     class Meta:
         db_table = 'Users'
 
-class TopPlayer(BaseModel):
-    user = ForeignKeyField(User, backref='top_player')
-    money_rank = IntegerField(default=0)
-    xp_rank = IntegerField(default=0)
-    class meta:
-        db_table = 'TopPlayers'

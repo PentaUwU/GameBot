@@ -2,5 +2,6 @@ from aiogram import Router
 
 router = Router()
 
-from . import handlers
+from . import tests
 from . import top
+from . import start
