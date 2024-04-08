@@ -20,7 +20,6 @@ async def top_play(callback: CallbackQuery):
     #     user.save()
     # await callback.answer('')
 
-
     top_balance_users = (User.select().order_by(User.balance.desc()).limit(10))
 
     message = "Топ игроков по балансу:\n"
