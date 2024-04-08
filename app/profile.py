@@ -6,7 +6,7 @@ from app.database.models import User
 import app.keyboards as kb
 
 
-# Вывод информации о пользователе и логика добавления уровня при заходе на профиль
+@router.callback_query(F.data == "btn_back_profile")
 @router.callback_query(F.data == "btn_profile")
 async def profile(callback: CallbackQuery):
 
