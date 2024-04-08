@@ -19,8 +19,19 @@ async def top_play(callback: CallbackQuery):
         user.user_lvl = new_level
         user.save()
     await callback.answer('')
-    # users = User.select().order_by(User.user_lvl.desc).limit(2)
-    # # user_list = [users]
+    top_balance_users = (User.select().order_by(User.balance.desc()).limit(10))
 
-    # for user in users:
-    #     await callback.message.edit_text(f'1) {user.username}{user.user_lvl}', reply_markup=kb.kb_back)
+    message = "Топ игроков по балансу:\n"
+    for i, user in enumerate(top_balance_users, start=1):
+        setattr(user, 'money_rank', i)
+        message += f'{i}) {user.username} - Баланс: {user.balance}\n'
+
+    # Получаем 10 пользователей с наибольшим опытом
+    top_lvl_users = (User.select().order_by(User.user_lvl.desc()).limit(10))
+
+    message += "\nТоп игроков по опыту:\n"
+    for i, user in enumerate(top_lvl_users, start=1):
+        setattr(user, 'lvl_rank', i)
+        message += f'{i}) {user.username} - Уровень: {user.user_lvl}\n'
+
+    await callback.message.edit_text(message, reply_markup=kb.kb_back)
