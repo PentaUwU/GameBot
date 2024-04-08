@@ -2,11 +2,11 @@ from aiogram import F
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery
 from app import router
-import app.keyboards as kb
 from app.database.models import User
 from typing import Union
 from datetime import timedelta, datetime
 from app.level import *
+import app.keyboards as kb
 
 # Команда старт
 @router.callback_query(F.data == 'btn_back')
@@ -58,6 +58,7 @@ async def cheat(callback: CallbackQuery):
     user_pidor_cheater = user.user_xp + 1000
     user.user_xp = user_pidor_cheater
     user.save()
+    await callback.answer('Вы пидорас! УРА')
 
 #Это я закоментил на всякий вдруг чтот наебнулось бы :)
 # @router.callback_query(F.data == "btn_profile")
@@ -81,7 +82,7 @@ async def dailybonus(callback: CallbackQuery):
         await callback.answer('Бонус успешно получен')
     else:
         # Вычисляем разницу времени
-        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now
+        remaining_time = user.last_bonus_claim + timedelta(hours=24) - datetime.now()
         # Форматируем временной интервал
         remaining_time_formatted = str(remaining_time).split('.')[0]
         await callback.message.edit_text(f"Сегодня ты уже получал бонус, приходи через: {remaining_time_formatted}",
