@@ -6,7 +6,7 @@ from app.database.models import User
 import app.keyboards as kb
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-
+import numpy as np
 class Transfer(StatesGroup):
     UserData = State()
     Sum = State()
@@ -53,8 +53,8 @@ async def Transfe_second(message: Message, state: FSMContext):
     userid = User.get_or_none(User.user_id == name["UserData"])
     
     if username or userid:
-        await message.answer(f"Введите сумму перевода:")
         await state.set_state(Transfer.Sum)
+        await message.answer(f"Введите сумму перевода:")
     else:  
         await message.answer(f"Пользователь {name['UserData']} не найден",
                                 reply_markup=kb.kb_back_transfer)
@@ -62,11 +62,18 @@ async def Transfe_second(message: Message, state: FSMContext):
 
 @router.message(Transfer.Sum)
 async def Transfer_third(message: Message, state: FSMContext):
-    sum = await state.get_data()
-    user_balance = User.get_or_none(User.balance >= sum)
+    await state.update_data(Sum = message.text)
+    sum_value = await state.get_data()
+    user = User.select().where(User.user_id == message.from_user.id).first()
+    user_balance = user.balance >= int(sum_value['Sum'])
     if user_balance:
-        await message.answer(f'Вы перевели {sum}')
-
+        await message.answer(f'Вы перевели {sum_value['Sum']}')
+    elif not user_balance:
+        await message.answer('У вас недостаточно средств!',
+                             reply_markup=kb.kb_back_transfer)
+    else:
+        await message.answer('Вы ввели некоректное значение',
+                             reply_markup=kb.kb_back_transfer)
 
 
 
