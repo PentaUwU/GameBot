@@ -1,12 +1,14 @@
 from app import router
 from app.level import next_xp, lvl_plus
-from aiogram import F
+from aiogram import F, Bot
 from aiogram.types import CallbackQuery, Message
 from app.database.models import User
 import app.keyboards as kb
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
+from config import TOKEN
 
+bot = Bot(token=TOKEN)
 
 
 class Transfer(StatesGroup):
@@ -86,16 +88,16 @@ async def transfer_fourth(callback: CallbackQuery, state: FSMContext):
     user_transfer = await state.get_data()
     user1.balance -= int(user_transfer['Sum'])
     user1.save()
-    try:
-        user2 = User.select().where(User.user_id == user_transfer['UserData']).first()
-    except:
+    if User.get_or_none(User.username == user_transfer['UserData']):
         user2 = User.select().where(User.username == user_transfer['UserData']).first()
-    
+    else:
+        user2 = User.select().where(User.user_id == user_transfer['UserData']).first()
+
     user2.balance += int(user_transfer['Sum'])
     user2.save()
     await callback.message.edit_text(f'Деньги успешно отправлены', 
                                      reply_markup=kb.kb_transfer)
-    await send
+    await bot.send_message(chat_id=user2.user_id, text=f'Вам зачислено {int(user_transfer['Sum'])}')
 
 
     # transfer = User.get_or_none(User.user_id == user_id_chek)
