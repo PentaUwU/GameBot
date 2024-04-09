@@ -20,7 +20,7 @@ class User(BaseModel):
     balance = BigIntegerField(default=10000)
     last_bonus_claim = DateTimeField(default=datetime.min)
     user_lvl = IntegerField(default=1)
-    user_xp = IntegerField(default=560)
+    user_xp = IntegerField(default=0)
     group_name = ForeignKeyField(Group, null=True)
     
 

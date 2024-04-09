@@ -19,6 +19,8 @@ btn_back_transfer = InlineKeyboardButton(text="Вернуться назад", c
 #Кнопка накрутки уровня для проверки
 btn_cheat = InlineKeyboardButton(text='💉НАКРУТКА', callback_data='btn_cheat')
 
+#Кнопка подтверждения
+btn_confirm = InlineKeyboardButton(text='Подтвердить', callback_data='btn_confirm')
 #-----------------------------------КЛАВИАТУРЫ-----------------------------------
 #Клавиатура вступления
 kb_back = InlineKeyboardMarkup(inline_keyboard=[[btn_back]])
@@ -28,3 +30,4 @@ kb_top_lvl = InlineKeyboardMarkup(inline_keyboard=[[btn_top_balance, btn_back]])
 kb_profile = InlineKeyboardMarkup(inline_keyboard=[[btn_transfer, btn_back]])
 kb_transfer =InlineKeyboardMarkup(inline_keyboard=[[btn_back_profile]])
 kb_back_transfer = InlineKeyboardMarkup(inline_keyboard=[[btn_back_transfer]])
+kb_confirm = InlineKeyboardMarkup(inline_keyboard=[[btn_confirm, btn_back_transfer]])

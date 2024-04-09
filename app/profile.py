@@ -6,7 +6,9 @@ from app.database.models import User
 import app.keyboards as kb
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-import numpy as np
+
+
+
 class Transfer(StatesGroup):
     UserData = State()
     Sum = State()
@@ -67,16 +69,23 @@ async def Transfer_third(message: Message, state: FSMContext):
     user = User.select().where(User.user_id == message.from_user.id).first()
     user_balance = user.balance >= int(sum_value['Sum'])
     if user_balance:
-        await message.answer(f'Вы перевели {sum_value['Sum']}')
+        await message.answer(f'Вы уверены что хотите перевести пользователю {sum_value['Sum']}',
+                             reply_markup=kb.kb_confirm)
     elif not user_balance:
         await message.answer('У вас недостаточно средств!',
                              reply_markup=kb.kb_back_transfer)
     else:
         await message.answer('Вы ввели некоректное значение',
                              reply_markup=kb.kb_back_transfer)
+        await state.clear()
 
 
-
+@router.callback_query(F.data == 'btn_confirm')
+async def transfer_fourth(callback: CallbackQuery, state: FSMContext):
+    user_id_chek = await state.get_data()
+    transfer = User.get_or_none(User.user_id == user_id_chek)
+    if transfer:
+        await callback.message.answer(f'aaa {transfer.balance}, {transfer.user_id}')
 
 
 
