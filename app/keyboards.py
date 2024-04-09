@@ -14,6 +14,7 @@ btn_daily_bonus =  InlineKeyboardButton(text='Ежедневный бонус', 
 btn_top_lvl =  InlineKeyboardButton(text='➡️', callback_data='btn_top_lvl')
 btn_top_balance =  InlineKeyboardButton(text='⬅️', callback_data='btn_top_balance')
 btn_transfer = InlineKeyboardButton(text = "Перевод денег", callback_data="btn_transfer")
+btn_back_transfer = InlineKeyboardButton(text="Вернуться назад", callback_data= "btn_transfer")
 
 #Кнопка накрутки уровня для проверки
 btn_cheat = InlineKeyboardButton(text='💉НАКРУТКА', callback_data='btn_cheat')
@@ -26,3 +27,4 @@ kb_top_balance = InlineKeyboardMarkup(inline_keyboard=[[btn_back, btn_top_lvl]])
 kb_top_lvl = InlineKeyboardMarkup(inline_keyboard=[[btn_top_balance, btn_back]])
 kb_profile = InlineKeyboardMarkup(inline_keyboard=[[btn_transfer, btn_back]])
 kb_transfer =InlineKeyboardMarkup(inline_keyboard=[[btn_back_profile]])
+kb_back_transfer = InlineKeyboardMarkup(inline_keyboard=[[btn_back_transfer]])

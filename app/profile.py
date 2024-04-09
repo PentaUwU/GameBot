@@ -2,12 +2,14 @@ from app import router
 from app.level import next_xp, lvl_plus
 from aiogram import F
 from aiogram.types import CallbackQuery, Message
-from typing import Union
 from app.database.models import User
 import app.keyboards as kb
+from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 
-
+class Transfer(StatesGroup):
+    UserData = State()
+    Sum = State()
 
 @router.callback_query(F.data == "btn_back_profile")
 @router.callback_query(F.data == "btn_profile")
@@ -38,21 +40,46 @@ async def profile(callback: CallbackQuery):
 @router.callback_query(F.data == "btn_transfer")
 async def transfer(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
-    await callback.message.edit_text("Введите id пользователя, которому хотите перевести деньги:")
-    
+    await state.set_state(Transfer.UserData)
+    await callback.message.edit_text("Введите id или UserName пользователя, которому хотите перевести деньги:",
+                                     reply_markup=kb.kb_transfer)
     # Сохраняем состояние, чтобы потом его использовать при получении ответа от пользователя
-    await state.set_state("waiting_for_userid")
 
-@router.message(state="waiting_for_userid")
-async def process_userid(message: Message, state: FSMContext):
-    # Получаем сохраненное состояние
-    async with state.proxy() as data:
-        user_id_to_transfer = message.text
-
-    # Здесь можно выполнить дополнительную обработку данных, если это необходимо
+@router.message(Transfer.UserData)
+async def Transfe_second(message: Message, state: FSMContext):
+    await state.update_data(UserData = message.text)
+    name = await state.get_data()
+    username = User.get_or_none(User.username == name["UserData"])
+    userid = User.get_or_none(User.user_id == name["UserData"])
     
-    # Пример: отправка сообщения пользователю с полученным user_id
-    await message.answer(f"Вы ввели {user_id_to_transfer}")
+    if username or userid:
+        await message.answer(f"Привет")
+        
+    else:  
+        await message.answer(f"Пользователь {name['UserData']} не найден",
+                                reply_markup=kb.kb_back_transfer)
+        await state.clear()
 
-    # Сбрасываем состояние обработки
-    await state.finish()
+
+
+
+
+
+
+
+
+
+
+
+# async def process_userid(message: Message, state: FSMContext):
+#     # Получаем сохраненное состояние
+#     async with state.proxy() as data:
+#         user_id_to_transfer = message.text
+
+#     # Здесь можно выполнить дополнительную обработку данных, если это необходимо
+    
+#     # Пример: отправка сообщения пользователю с полученным user_id
+#     await message.answer(f"Вы ввели {user_id_to_transfer}")
+
+#     # Сбрасываем состояние обработки
+#     await state.finish()
