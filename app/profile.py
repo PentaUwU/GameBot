@@ -38,7 +38,7 @@ async def profile(callback: CallbackQuery):
                                     reply_markup= kb.kb_profile)
     
 @router.callback_query(F.data == "btn_transfer")
-async def transfer(callback: CallbackQuery, state: FSMContext):
+async def transfer_first(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
     await state.set_state(Transfer.UserData)
     await callback.message.edit_text("Введите id или UserName пользователя, которому хотите перевести деньги:",
@@ -53,12 +53,16 @@ async def Transfe_second(message: Message, state: FSMContext):
     userid = User.get_or_none(User.user_id == name["UserData"])
     
     if username or userid:
-        await message.answer(f"Привет")
+        await message.answer(f"Введите сумму перевода:")
         
     else:  
         await message.answer(f"Пользователь {name['UserData']} не найден",
                                 reply_markup=kb.kb_back_transfer)
         await state.clear()
+
+@router.message(Transfer.UserData)
+async def Transfer_third(message: Message, state: FSMContext):
+    await state.update_data(UserData = message.text)
 
 
 
