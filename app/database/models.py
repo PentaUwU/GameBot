@@ -14,6 +14,7 @@ class Group(BaseModel):
     group_lvl = IntegerField(default=0)
     group_xp = IntegerField(default=0)
     group_users_count = IntegerField(default=1)
+
 class User(BaseModel):
     user_id = BigIntegerField(primary_key=True)
     username = CharField(null=True)
@@ -22,7 +23,10 @@ class User(BaseModel):
     user_lvl = IntegerField(default=1)
     user_xp = IntegerField(default=0)
     group_name = ForeignKeyField(Group, null=True)
-    
 
+# class Work(BaseModel):
+#     work_name = CharField(primary_key=True)
+#     reward = IntegerField(default=10)
+#     time = TimeField()
 
     
