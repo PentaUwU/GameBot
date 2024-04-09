@@ -54,19 +54,18 @@ async def Transfe_second(message: Message, state: FSMContext):
     
     if username or userid:
         await message.answer(f"Введите сумму перевода:")
-        
+        await state.set_state(Transfer.Sum)
     else:  
         await message.answer(f"Пользователь {name['UserData']} не найден",
                                 reply_markup=kb.kb_back_transfer)
         await state.clear()
 
-@router.message(Transfer.UserData)
+@router.message(Transfer.Sum)
 async def Transfer_third(message: Message, state: FSMContext):
-    await state.update_data(UserData = message.text)
-
-
-
-
+    sum = await state.get_data()
+    user_balance = User.get_or_none(User.balance >= sum)
+    if user_balance:
+        await message.answer(f'Вы перевели {sum}')
 
 
 
