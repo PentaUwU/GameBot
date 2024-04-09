@@ -1,9 +1,12 @@
 from app import router
 from app.level import next_xp, lvl_plus
 from aiogram import F
-from aiogram.types import CallbackQuery
+from aiogram.types import CallbackQuery, Message
+from typing import Union
 from app.database.models import User
 import app.keyboards as kb
+from aiogram.fsm.context import FSMContext
+
 
 
 @router.callback_query(F.data == "btn_back_profile")
@@ -33,10 +36,23 @@ async def profile(callback: CallbackQuery):
                                     reply_markup= kb.kb_profile)
     
 @router.callback_query(F.data == "btn_transfer")
-async def transfer(callback: CallbackQuery):
-    user = User.select().where(User.user_id == callback.from_user.id).first()
-    await callback.answer('')
+async def transfer(callback: CallbackQuery, state: FSMContext):
+    await callback.answer()
     await callback.message.edit_text("Введите id пользователя, которому хотите перевести деньги:")
-    userid = callback.message.text 
-    # alabay = User.get(User.user_id == userid)
-    await callback.message.answer(f"Вы ввели {userid}")
+    
+    # Сохраняем состояние, чтобы потом его использовать при получении ответа от пользователя
+    await state.set_state("waiting_for_userid")
+
+@router.message(state="waiting_for_userid")
+async def process_userid(message: Message, state: FSMContext):
+    # Получаем сохраненное состояние
+    async with state.proxy() as data:
+        user_id_to_transfer = message.text
+
+    # Здесь можно выполнить дополнительную обработку данных, если это необходимо
+    
+    # Пример: отправка сообщения пользователю с полученным user_id
+    await message.answer(f"Вы ввели {user_id_to_transfer}")
+
+    # Сбрасываем состояние обработки
+    await state.finish()
