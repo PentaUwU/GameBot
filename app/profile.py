@@ -82,23 +82,27 @@ async def Transfer_third(message: Message, state: FSMContext):
 
 @router.callback_query(F.data == 'btn_confirm')
 async def transfer_fourth(callback: CallbackQuery, state: FSMContext):
-    user_id_chek = await state.get_data()
-    transfer = User.get_or_none(User.user_id == user_id_chek)
-    if transfer:
-        await callback.message.answer(f'aaa {transfer.balance}, {transfer.user_id}')
-
-
-
-
-# async def process_userid(message: Message, state: FSMContext):
-#     # Получаем сохраненное состояние
-#     async with state.proxy() as data:
-#         user_id_to_transfer = message.text
-
-#     # Здесь можно выполнить дополнительную обработку данных, если это необходимо
+    user1 = User.select().where(User.user_id == callback.from_user.id).first()
+    user_transfer = await state.get_data()
+    user1.balance -= int(user_transfer['Sum'])
+    user1.save()
+    try:
+        user2 = User.select().where(User.user_id == user_transfer['UserData']).first()
+    except:
+        user2 = User.select().where(User.username == user_transfer['UserData']).first()
     
-#     # Пример: отправка сообщения пользователю с полученным user_id
-#     await message.answer(f"Вы ввели {user_id_to_transfer}")
+    user2.balance += int(user_transfer['Sum'])
+    user2.save()
+    await callback.message.edit_text(f'Деньги успешно отправлены', 
+                                     reply_markup=kb.kb_transfer)
+    await send
 
-#     # Сбрасываем состояние обработки
-#     await state.finish()
+
+    # transfer = User.get_or_none(User.user_id == user_id_chek)
+    # if transfer:
+    #     await callback.message.answer(f'aaa {transfer.balance}, {transfer.user_id}')
+
+
+
+
+
