@@ -1,5 +1,5 @@
 from aiogram.types import (InlineKeyboardMarkup, InlineKeyboardButton)
-
+from .database.models import Work
 
 
 #-----------------------------------КНОПКИ-----------------------------
@@ -21,13 +21,28 @@ btn_cheat = InlineKeyboardButton(text='💉НАКРУТКА', callback_data='btn
 
 #Кнопка подтверждения
 btn_confirm = InlineKeyboardButton(text='Подтвердить', callback_data='btn_confirm')
+
+#Кнопка работы
+btn_work = InlineKeyboardButton(text='Работа', callback_data='btn_work')
+
+#Кнопки работ
+class kb_work:
+    def __init__(self):
+        pass
+    def work(self, Work):
+        kb_work = InlineKeyboardMarkup(row_width = 2)
+        kb_work.add(
+            InlineKeyboardButton (text=f'{Work.work_name}')
+        )
+# btn_work1 = InlineKeyboardButton(text='Шахта', callback_data='btn_work1')
 #-----------------------------------КЛАВИАТУРЫ-----------------------------------
 #Клавиатура вступления
 kb_back = InlineKeyboardMarkup(inline_keyboard=[[btn_back]])
-kb_main = InlineKeyboardMarkup(inline_keyboard=[[btn_profile, btn_daily_bonus],[btn_top],[btn_cheat]])
+kb_main = InlineKeyboardMarkup(inline_keyboard=[[btn_profile, btn_daily_bonus],[btn_top, btn_work],[btn_cheat]])
 kb_top_balance = InlineKeyboardMarkup(inline_keyboard=[[btn_back, btn_top_lvl]])
 kb_top_lvl = InlineKeyboardMarkup(inline_keyboard=[[btn_top_balance, btn_back]])
 kb_profile = InlineKeyboardMarkup(inline_keyboard=[[btn_transfer, btn_back]])
 kb_transfer =InlineKeyboardMarkup(inline_keyboard=[[btn_back_profile]])
 kb_back_transfer = InlineKeyboardMarkup(inline_keyboard=[[btn_back_transfer]])
 kb_confirm = InlineKeyboardMarkup(inline_keyboard=[[btn_confirm, btn_back_transfer]])
+# kb_work = InlineKeyboardMarkup(inline_keyboard=[[]])
