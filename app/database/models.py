@@ -12,7 +12,6 @@ class Work(BaseModel):
     work_name = CharField()
     callback_work = CharField()
     reward = IntegerField(default=1000)
-    time = TimeField(primary_key=True)
 
 class Group(BaseModel):
     group_name = CharField(primary_key=True)
@@ -29,5 +28,5 @@ class User(BaseModel):
     user_lvl = IntegerField(default=1)
     user_xp = IntegerField(default=1)
     group_name = ForeignKeyField(Group, null=True)
-    time = ForeignKeyField(Work, null=True)
+    time_work = DateTimeField(default=datetime.min)
 

@@ -33,15 +33,15 @@ btn_confirm = InlineKeyboardButton(text='Подтвердить', callback_data=
 btn_work = InlineKeyboardButton(text='Работа', callback_data='btn_work')
 
 #Кнопки работ
-class Keyboards:
-    def __init__(self, Work):
-        pass
-    def work(self):
-        keyboard = InlineKeyboardMarkup(row_width = 2)
-        keyboard.add(
-            InlineKeyboardButton (text=f'{Work.work_name}')
-        )
-# btn_work1 = InlineKeyboardButton(text='Шахта', callback_data='btn_work1')
+# class Keyboards:
+#     def __init__(self, Work):
+#         pass
+#     def work(self):
+#         keyboard = InlineKeyboardMarkup(row_width = 2)
+#         keyboard.add(
+#             InlineKeyboardButton (text=f'{Work.work_name}')
+        # )
+btn_work1 = InlineKeyboardButton(text='Шахта', callback_data='btn_work1')
 #-----------------------------------КЛАВИАТУРЫ-----------------------------------
 #Клавиатура вступления
 kb_back = InlineKeyboardMarkup(inline_keyboard=[[btn_back]])
@@ -52,7 +52,7 @@ kb_profile = InlineKeyboardMarkup(inline_keyboard=[[btn_transfer, btn_back, btn_
 kb_transfer =InlineKeyboardMarkup(inline_keyboard=[[btn_back_profile]])
 kb_back_transfer = InlineKeyboardMarkup(inline_keyboard=[[btn_back_transfer]])
 kb_confirm = InlineKeyboardMarkup(inline_keyboard=[[btn_confirm, btn_back_transfer]])
-# kb_work = InlineKeyboardMarkup(inline_keyboard=[[]])
+kb_work = InlineKeyboardMarkup(inline_keyboard=[[btn_work1]])
 kb_ingroup = InlineKeyboardMarkup(inline_keyboard=[[btn_menu_group]])
 kb_withoutgroup = InlineKeyboardMarkup(inline_keyboard=[[btn_join_group, btn_create_group]])
 kb_creategroup = InlineKeyboardMarkup(inline_keyboard=[[btn_accept_create, btn_decline_create]])
