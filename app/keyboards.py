@@ -6,6 +6,7 @@ from .database.models import Work
 #Кнопка назад
 btn_back = InlineKeyboardButton(text='Вернуться назад', callback_data='btn_back')
 btn_back_profile = InlineKeyboardButton(text = "Вернуться назад", callback_data='btn_back_profile')
+btn_back_group = InlineKeyboardButton(text = 'Вернуться назад', callback_data='btn_back_group')
 
 #Кнопки вступления
 btn_profile =  InlineKeyboardButton(text='Профиль', callback_data='btn_profile')
@@ -16,6 +17,11 @@ btn_top_balance =  InlineKeyboardButton(text='⬅️', callback_data='btn_top_ba
 btn_transfer = InlineKeyboardButton(text = "Перевод денег", callback_data="btn_transfer")
 btn_group = InlineKeyboardButton(text = "Меню групп", callback_data='btn_group')
 btn_back_transfer = InlineKeyboardButton(text="Вернуться назад", callback_data= "btn_transfer")
+btn_create_group = InlineKeyboardButton(text="Создать группу", callback_data='btn_create_group')
+btn_join_group = InlineKeyboardButton(text="Вступить в группу", callback_data='btn_join_group')
+btn_menu_group = InlineKeyboardButton(text="Меню группы", callback_data='btn_menu_group')
+btn_accept_create = InlineKeyboardButton(text='Подтвердить', callback_data='btn_accept_create')
+btn_decline_create = InlineKeyboardButton(text='Отказаться', callback_data='btn_decline_create')
 
 #Кнопка накрутки уровня для проверки
 btn_cheat = InlineKeyboardButton(text='💉НАКРУТКА', callback_data='btn_cheat')
@@ -47,3 +53,7 @@ kb_transfer =InlineKeyboardMarkup(inline_keyboard=[[btn_back_profile]])
 kb_back_transfer = InlineKeyboardMarkup(inline_keyboard=[[btn_back_transfer]])
 kb_confirm = InlineKeyboardMarkup(inline_keyboard=[[btn_confirm, btn_back_transfer]])
 # kb_work = InlineKeyboardMarkup(inline_keyboard=[[]])
+kb_ingroup = InlineKeyboardMarkup(inline_keyboard=[[btn_menu_group]])
+kb_withoutgroup = InlineKeyboardMarkup(inline_keyboard=[[btn_join_group, btn_create_group]])
+kb_creategroup = InlineKeyboardMarkup(inline_keyboard=[[btn_accept_create, btn_decline_create]])
+kb_back_group = InlineKeyboardMarkup(inline_keyboard=[[btn_back_group]])

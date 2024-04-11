@@ -8,3 +8,4 @@ from . import start
 from . import profile
 from . import dailybonus
 from . import work
+from . import group
