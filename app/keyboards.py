@@ -43,6 +43,9 @@ btn_work = InlineKeyboardButton(text='Работа', callback_data='btn_work')
         # )
 btn_work1 = InlineKeyboardButton(text='Шахта', callback_data='btn_work1')
 #-----------------------------------КЛАВИАТУРЫ-----------------------------------
+# keyboard_job = InlineKeyboardMarkup()
+# keyboard_job.add(InlineKeyboardButton(text=''))
+
 #Клавиатура вступления
 kb_back = InlineKeyboardMarkup(inline_keyboard=[[btn_back]])
 kb_main = InlineKeyboardMarkup(inline_keyboard=[[btn_profile, btn_daily_bonus],[btn_top, btn_work],[btn_cheat]])
