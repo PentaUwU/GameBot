@@ -26,12 +26,12 @@ btn_confirm = InlineKeyboardButton(text='Подтвердить', callback_data=
 btn_work = InlineKeyboardButton(text='Работа', callback_data='btn_work')
 
 #Кнопки работ
-class kb_work:
-    def __init__(self):
+class Keyboards:
+    def __init__(self, Work):
         pass
-    def work(self, Work):
-        kb_work = InlineKeyboardMarkup(row_width = 2)
-        kb_work.add(
+    def work(self):
+        keyboard = InlineKeyboardMarkup(row_width = 2)
+        keyboard.add(
             InlineKeyboardButton (text=f'{Work.work_name}')
         )
 # btn_work1 = InlineKeyboardButton(text='Шахта', callback_data='btn_work1')
