@@ -4,29 +4,28 @@ from aiogram.types import Message, CallbackQuery
 from datetime import datetime,timedelta
 from . import router
 import app.keyboards as kb
+from aiogram.types import InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 
-class Job:
-    def __init__(self, name, reward, time):
-        self.name = name
-        self.reward = reward
-        self.time = time
-        
-
-    async def start(self, callback: CallbackQuery):
-        user = User.select().where(User.user_id == callback.from_user.id).first()
-        await callback.answer('')
-        if datetime.now() - user.time_work > timedelta(hours=self.time):
-            user.time_work = datetime.now()
-            user.balance += 1000
-            user.save()
-            await callback.message.edit_text('Возвращайтесь через час')
-        else:
-            await callback.message.edit_text('Час не прошел')
+kb_jobjob = InlineKeyboardBuilder()
 
 
-job_mining = Job('Шахта', 1000, 1)
+def keyboard_job():
+    global kb_jobjob
+    
+    for i in kb.button_for_job:
+        kb_jobjob.add(InlineKeyboardButton(text = i['name'], callback_data=i['call']))
+        @router.callback_query(F.data == i['call'])
+        async def start(callback: CallbackQuery):
+            await callback.message.answer('')
+            await callback.message.edit_text('Выберите работу:', reply_markup=kb_jobjob)
+
+
+
+
+
 
 
 # @router.callback_query(F.data == 'btn_work')

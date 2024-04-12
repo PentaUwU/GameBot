@@ -1,6 +1,6 @@
 from aiogram.types import (InlineKeyboardMarkup, InlineKeyboardButton)
 from .database.models import Work
-
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 #-----------------------------------КНОПКИ-----------------------------
 #Кнопка назад
@@ -60,3 +60,52 @@ kb_ingroup = InlineKeyboardMarkup(inline_keyboard=[[btn_menu_group]])
 kb_withoutgroup = InlineKeyboardMarkup(inline_keyboard=[[btn_join_group, btn_create_group]])
 kb_creategroup = InlineKeyboardMarkup(inline_keyboard=[[btn_accept_create, btn_decline_create]])
 kb_back_group = InlineKeyboardMarkup(inline_keyboard=[[btn_back_group]])
+
+
+button_for_job = [
+    {"name": "Разработчик веб-приложений",
+     "reward": 60000, 
+     "time": "1",
+     "call": "web_application_developer"},
+
+    {"name": "Дизайнер UI/UX", 
+     "reward": 70000, 
+     "time": "1",
+     "call": "ui_ux_designer"},
+
+    {"name": "Администратор баз данных", 
+     "reward": 80000, 
+     "time": "1",
+     "call": "database_administrator"},
+
+    {"name": "Менеджер по продажам", 
+     "reward": 50000, 
+     "time": "1",
+     "call": "sales_manager"},
+
+    {"name": "Аналитик данных", 
+     "reward": 90000, 
+     "time": "1",
+     "call": "data_analyst"},
+
+    {"name": "Тестировщик программного обеспечения", 
+     "reward": 55000, 
+     "time": "1",
+     "call": "software_tester"},
+
+    {"name": "Разнорабочий на стройке", 
+     "reward": 30000, 
+     "time": "1",
+     "call": "construction_worker"},
+
+    {"name": "Уборщик", 
+     "reward": 25000, 
+     "time": "1",
+     "call": "cleaner"},
+
+    {"name": "Помощник на складе", 
+     "reward": 28000, 
+     "time": "1",
+     "call": "warehouse_assistant"}
+]
+
