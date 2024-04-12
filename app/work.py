@@ -4,17 +4,17 @@ from aiogram.types import Message, CallbackQuery
 from datetime import datetime,timedelta
 from . import router
 import app.keyboards as kb
-from aiogram.types import InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 
 kb_jobjob = InlineKeyboardBuilder()
-
+# kb_jobjob_markup = InlineKeyboardMarkup(inline_keyboard=kb_jobjob.export())
 
 def keyboard_job():
     global kb_jobjob
-    
+    # global kb_jobjob_markup
     for i in kb.button_for_job:
         kb_jobjob.add(InlineKeyboardButton(text = i['name'], callback_data=i['call']))
         @router.callback_query(F.data == i['call'])
@@ -23,7 +23,7 @@ def keyboard_job():
             await callback.message.edit_text('Выберите работу:', reply_markup=kb_jobjob)
 
 
-
+keyboard_job()
 
 
 
